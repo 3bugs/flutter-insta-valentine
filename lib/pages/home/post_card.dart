@@ -1,27 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:insta_valentine/models/comment.dart';
+import 'package:insta_valentine/models/post.dart';
 
 // ignore_for_file: avoid_print
 
 class PostCard extends StatefulWidget {
   const PostCard({
     Key? key,
-    required this.id,
-    required this.author,
-    required this.image,
-    required this.content,
-    required this.authorImage,
-    required this.comments,
-    //required this.postComment,
+    required this.post,
   }) : super(key: key);
 
-  final int id;
-  final String author;
-  final String image;
-  final String content;
-  final String authorImage;
-  final List comments;
-
-  //final Function postComment;
+  final Post post;
 
   @override
   State<PostCard> createState() => _PostCard();
@@ -32,53 +21,45 @@ class _PostCard extends State<PostCard> {
   final TextEditingController _commentController = TextEditingController();
 
   Widget _buildComments(BuildContext context) {
-    List<Widget> comments = [];
-
-    for (int i = 0; i < widget.comments.length; i++) {
-      comments.add(
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-          child: Row(
-            children: [
-              Expanded(
-                child: RichText(
-                  textAlign: TextAlign.left,
-                  text: TextSpan(
-                    //style: DefaultTextStyle.of(context).style,
-                    children: [
-                      TextSpan(
-                        text: widget.comments[i]["author"],
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                      const TextSpan(text: "  "),
-                      TextSpan(
-                        text: widget.comments[i]["comment"],
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1?.color,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
     return Column(
-      children: comments,
+      children: widget.post.comments
+          .map(
+            (item) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: RichText(
+                      textAlign: TextAlign.left,
+                      text: TextSpan(
+                        //style: DefaultTextStyle.of(context).style,
+                        children: [
+                          TextSpan(
+                            text: item.author,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          const TextSpan(text: "  "),
+                          TextSpan(
+                            text: item.comment,
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyText1?.color,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+          .toList(),
     );
   }
-
-  /*void addComment(String comment) {
-    widget.postComment(widget.id, comment, "Khanh Nguyen");
-    _commentController.clear();
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -92,9 +73,10 @@ class _PostCard extends State<PostCard> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(4, 4, 8, 4),
-                  child: widget.authorImage != ""
+                  child: widget.post.authorImage != ""
                       ? CircleAvatar(
-                          backgroundImage: AssetImage('assets/images/${widget.authorImage}'),
+                          backgroundImage: AssetImage(
+                              'assets/images/${widget.post.authorImage}'),
                           backgroundColor: Colors.pink.shade200,
                           radius: 22,
                           onBackgroundImageError: (exception, context) {
@@ -104,8 +86,10 @@ class _PostCard extends State<PostCard> {
                       : CircleAvatar(
                           backgroundColor: Colors.pink.shade800,
                           child: Text(
-                            widget.author.split(" ")[0].substring(0, 1) +
-                                widget.author.split(" ")[1].substring(0, 1),
+                            widget.post.author.split(" ")[0].substring(0, 1) +
+                                widget.post.author
+                                    .split(" ")[1]
+                                    .substring(0, 1),
                             style: const TextStyle(color: Colors.white),
                           ),
                           radius: 22,
@@ -113,7 +97,7 @@ class _PostCard extends State<PostCard> {
                 ),
                 Expanded(
                   child: Text(
-                    widget.author,
+                    widget.post.author,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -129,7 +113,7 @@ class _PostCard extends State<PostCard> {
               vertical: 4,
               horizontal: 0,
             ),
-            child: widget.image != ""
+            child: widget.post.image != ""
                 ? GestureDetector(
                     onDoubleTap: () => {
                       setState(() {
@@ -140,7 +124,7 @@ class _PostCard extends State<PostCard> {
                       image: NetworkImage(widget.image),
                     ),*/
                     child: Image.network(
-                      widget.image,
+                      widget.post.image,
                       fit: BoxFit.fitWidth,
                     ),
                   )
@@ -150,7 +134,7 @@ class _PostCard extends State<PostCard> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
             child: Text(
-              widget.content,
+              widget.post.content,
               textAlign: TextAlign.left,
             ),
           ),
@@ -187,10 +171,12 @@ class _PostCard extends State<PostCard> {
                     //onSubmitted: (String text) => {addComment(text)}
                     onSubmitted: (text) {
                       setState(() {
-                        widget.comments.add({
-                          'author': 'Flutter',
-                          'comment': text,
-                        });
+                        widget.post.comments.add(
+                          Comment(
+                            author: 'Flutter',
+                            comment: text,
+                          ),
+                        );
                         _commentController.clear();
                       });
                     },

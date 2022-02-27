@@ -49,9 +49,12 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.pink[50],
         appBarTheme: AppBarTheme(
           color: Colors.pink,
-          titleTextStyle: GoogleFonts.kaushanScript(fontSize: 28.0),
+          titleTextStyle: GoogleFonts.kaushanScript(
+            fontSize: 28.0,
+            color: Colors.white,
+          ),
         ),
-        textTheme: GoogleFonts.robotoTextTheme(),
+        //textTheme: GoogleFonts.robotoTextTheme(),
         //primaryTextTheme: GoogleFonts.promptTextTheme(),
         /*textTheme: ThemeData.light().textTheme.apply(
               fontFamily: GoogleFonts.prompt().fontFamily,
@@ -111,8 +114,8 @@ class MyApp extends StatelessWidget {
         // Define the default `TextTheme`. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
         textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          headline1: GoogleFonts.prompt(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: GoogleFonts.sarabun(fontSize: 36.0, fontStyle: FontStyle.italic),
           bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
       ),*/
