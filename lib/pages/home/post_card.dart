@@ -45,7 +45,7 @@ class _PostCard extends State<PostCard> {
                   textAlign: TextAlign.left,
                   text: TextSpan(
                     //style: DefaultTextStyle.of(context).style,
-                    children: <TextSpan>[
+                    children: [
                       TextSpan(
                         text: widget.comments[i]["author"],
                         style: TextStyle(
