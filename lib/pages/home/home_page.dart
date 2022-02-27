@@ -74,7 +74,10 @@ class HomePage extends StatelessWidget {
         title: const Text('InstaValentine'),
       ),
       body: ListView.builder(
-          padding: EdgeInsets.all(screenWidth > 600 ? 100.0 : 8.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: screenWidth > 600 ? (screenWidth - 600) / 2 : 8.0,
+            vertical: screenWidth > 600 ? 16.0 : 8.0,
+          ),
           itemCount: _posts.length + 1,
           itemBuilder: (BuildContext context, int index) {
             return (index == 0)
