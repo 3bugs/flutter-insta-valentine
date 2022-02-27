@@ -60744,11 +60744,13 @@ return new A.uJ(B.zs,"InstaValentine",A.aff(A.acF(s,s,s,s,s,B.fG,s,s,s,s,s,s,s,s
 A.ld.prototype={}
 A.F3.prototype={}
 A.Dc.prototype={
-P(a,b){var s,r=null,q=b.Z(t.w).f.a.a
-A.nb("\u0e04\u0e27\u0e32\u0e21\u0e01\u0e27\u0e49\u0e32\u0e07\u0e08\u0e2d: "+A.e(q))
-s=q>600?100:8
+P(a,b){var s,r,q=null,p=b.Z(t.w).f.a.a
+A.nb("\u0e04\u0e27\u0e32\u0e21\u0e01\u0e27\u0e49\u0e32\u0e07\u0e08\u0e2d: "+A.e(p))
+s=p>600
+r=s?(p-600)/2:8
+s=s?16:8
 $.abv()
-return new A.vY(new A.rB(B.Kv,new A.L_(r,r,1/0,56),r),new A.DI(new A.a_K(new A.Tp(),4,!0,!0,!0),new A.aX(s,s,s,s),B.aP,!1,r,!0,B.uC,!1,r,4,B.aG,B.EK,r,B.aq,r),r)}}
+return new A.vY(new A.rB(B.Kv,new A.L_(q,q,1/0,56),q),new A.DI(new A.a_K(new A.Tp(),4,!0,!0,!0),new A.aX(r,s,r,s),B.aP,!1,q,!0,B.uC,!1,q,4,B.aG,B.EK,q,B.aq,q),q)}}
 A.Tp.prototype={
 $2(a,b){var s=null
 return b===0?A.pL("VALENTINE'S DAY",s,s,s,A.ahj(s,s,s,s,s,s,s,"Quintessential",s,40,s,s,A.aE([B.lH,new A.tU("030ff82f2f4a02d56504ed9191c94412439e0fc2bb5ea13d563ecc793620de06",73476)],t.gm,t.Ks),s,s,s,s,s,s,s,s),B.ke,s):new A.vv($.abv()[b-1],s)},
